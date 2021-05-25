@@ -1,11 +1,11 @@
 import './App.css';
-import QueryInput from './QueryInput';
+import QueryContainer from './components/QueryContainer';
 
 function App() {
   return (
     <h1 className="App">
       PeachQL React App
-      <QueryInput />
+      <QueryContainer />
     </h1>
   );
 }
