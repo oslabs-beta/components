@@ -1,6 +1,7 @@
 import './App.css';
 import SchemaDisplayContainer from './SchemaDisplayContainer';
-import ResponseDisplay from './ResponseDisplay'
+import ResponseDisplay from './ResponseDisplay';
+import QueryContainer from './components/QueryContainer';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <SchemaDisplayContainer/>
       <div id="ResponseDisplay">
       <ResponseDisplay />
+      <QueryContainer />
       </div>
     </div>
     
