@@ -1,12 +1,19 @@
 import './App.css';
+import SchemaDisplayContainer from './SchemaDisplayContainer';
+import ResponseDisplay from './ResponseDisplay';
 import QueryContainer from './components/QueryContainer';
 
 function App() {
   return (
-    <h1 className="App">
-      PeachQL React App
+    <div>
+      <h1 className="App">PeachQL React App</h1>
+      <SchemaDisplayContainer/>
+      <div id="ResponseDisplay">
+      <ResponseDisplay />
       <QueryContainer />
-    </h1>
+      </div>
+    </div>
+    
   );
 }
 
