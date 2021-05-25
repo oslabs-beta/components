@@ -6,47 +6,65 @@ as many SchemaDisplay components as the uploaded Schema require
 import React, { useState } from 'react';
 import SchemaDisplay from './SchemaDisplay';
 
-
-
-
 const SchemaDisplayContainer = () => {
-    
+
     // list of Schema to be rendered by SchemaDisplay
     const [schemaList, setSchemaList] = useState([
         // for now, we are hard-coding initial schema
         // later, we will start with an empty array and update when...
-        // schema are uploaded or entered by text
-        {text: 'here is a Schema', id: 1}, 
-        {text: 'here is another Schema', id: 2}
+        // schema are uploaded or entered by schemaText
+        {
+            schemaText: `type Starship {
+            id: ID!
+            name: String!
+            length(unit: LengthUnit = METER): Float
+          }`
+        }, 
+        {
+            schemaText: `type Character {
+            name: String!
+            appearsIn: [Episode!]!
+        }`
+        }
     ]);
 
     // input for addint additional Schema directly
     const [schemaInput, setSchemaInput] = useState('');
     
-    // for now, we are hard-coding a single newSchema
-    const newSchema = {text: 'yet another Schema', id: 3}
-
-    // updateSchema checks to see if the newSchema to be added already... 
+    // updateSchema checks to see if the schemaText of the schemaInput to be added already... 
     // ...exists in the schemaList and updates if not
-    const updateSchema = () => {
-        const index = schemaList.findIndex(schema => schema.id === newSchema.id);
-        if (index === -1) {
+    const updateSchemaList = () => {
+        const index = schemaList.findIndex(schema => schema.schemaText === schemaInput);
+        if (index === -1 && schemaInput !== '') {
             setSchemaList((prev) => {
-                return [...prev, newSchema];
+                return [...prev, {schemaText: schemaInput}];
             });
+            setSchemaInput('');
         }
     }
 
+    const updateSchemaInput = (e) => {
+        setSchemaInput(e.target.value);
+    }
+
     return (
-        <div class="schema-display-container">
+        <div className="schema-display-container">
             <ul>
                 {schemaList.map(schema => {
-                    return <li><SchemaDisplay key={schema.id} schema={schema}/></li>
+                    return <SchemaDisplay 
+                            key={schema.schemaText} 
+                            schema={schema}/>
                 })}
             </ul>
-            <p>The button below will currently add a single additional schema</p>
-            <input></input>
-        <button onClick={updateSchema}>Update Schema</button>
+            <input 
+              type="schemaText" 
+              onChange={updateSchemaInput} 
+              value={schemaInput}>
+            </input>
+            <button 
+              onClick={updateSchemaList}>
+              Update Schema
+            </button>
         </div>
     )
 }
